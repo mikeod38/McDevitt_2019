@@ -1,0 +1,194 @@
+---
+title: How do worms smell? A visit with 7th grade science classes at McDevitt middle
+  school
+author: Mike O’Donnell, Travis Rogers, Inna Nechipurenko, Tyler Hill, Asuka Takeishi,
+  Piali Sengupta, Nathan Johnson and Morgan King
+date: "7/19/2019"
+output: 
+  pdf_document:
+    toc: true
+    toc_depth: 1
+    number_sections: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+  The Sengupta lab https://www.senguptalab.org uses the roundworm (nematode), *C. elegans* to study the development and function of the nervous system. We think these animals can be a useful system to teach young students about the nervous system, biology and ecology. During the "Scientists in the classroom" event (https://figshare.com/articles/Scientists_in_the_Classroom/7849184), we arranged a demonstration for the 7th grade science classes at McDevitt middle school in Waltham, Ma hosted by 7th grade science teachers Morgan King and Nathan Johnson. 
+  
+  The 7th grade curriculum offered a topic which fit well within the focus of the Sengupta lab, "Ecosystem energy" in which the specific unit standards could be addressed: 
+
+  \begin{itemize}
+  \item[] MS-LS2-2. Describe how relationships among and between organisms in an ecosystem can be competitive, predatory, parasitic, and mutually beneficial and that these interactions are found across multiple ecosystems.
+  \item[] MS-LS1-4. Construct an explanation based on evidence for how characteristic animal behaviors and specialized plant structures increase the probability of successful reproduction of animals and plants.
+\end{itemize}
+  
+  
+  *C elegans* feeds on bacteria and uses its nervous system to make adaptive decisions about feeding and reproduction^1,2^. These worms can be cultured on petri plates using non-pathogenic bacteria as a food source and are easily viewed using microscopes commonly available in middle school science labs. In the lab, the relationship between the worm and its food source is primarily predatory, but in the wild the nematode-bacterial relationships are more complex, involving pathogenic, symbiotic, and parasitic interactions. *C. elegans* also uses a complex combination of sensory cues to make food choice and egg-laying decisions. We thought these characteristics would make *C. elegans* a good system to demonstrate these concepts to students. 
+  
+  For the purpose of the demonstration, we decided to look at how smell (olfactory) could influence decisions about egg-laying and food search behavior. For simplicity, we used a *C. elegans* strain that lacked sensory endings called cilia - which we predicted would disrupt food search behavior and alter egg-laying. To illustrate these points we planned a set of three stations, each illustrating a distinct set of concepts. 
+  
+
+# Methods
+
+During each 55 minute session we began with a 10-minute slide presentation to introduce the students to the topic. We emphasized that roundworms are very common, that they come in a wide range of sizes and come from diverse habitats. We also described the habitat of *C. elegans* - rotting fruit and compost^2^ - as well as their bacterial food source. The introduction also included details about taste and smell in the worm and how these relate to the activity stations, which were also described briefly. Students were then divided into three groups, and were sent to one of the three stations. Students were given instructios as detailed below which they read briefly as a group before a verbal introduction by the scientist or teacher. 10 minutes was devoted to each station with a brief wrap-up time period so the students could fill in their respective worksheet.
+
+*Strains:*
+*C. elegans* N2 ("normal worms") and *daf-12(sa204) X; daf-19(m86) II* ("mutant worms") were used. *daf-19* encodes an RFX-type transcription factor required for formation of sensory cilia^3^. *E. coli* OP50, which is a non-pathogenic bacterial food source for *C. elegans* was used in stations 1 and 3. 
+
+*Food chemotaxis assay:*
+On the evening prior to the school visit, several 10cm NGM plate were seeded with 10\( \mu L \) of an overnight culture of OP50 grown in LB media. This spot was placed appoximately 6cm away from a "control" spot, which was marked with ink as a reference. Prior to each class session, worms of each genotype were washed off of a 10cm culture plate into a 1.5mL centrifuge tube and rinsed 3x in S-basal media. These were divided such that each group was able to use 1-2 tubes of worms of each genotype for their respective experiments. Student volunteers were asked to wear nitrile gloves, then were instructed how to use a glass pasteur pipette to transfer worms from the centrifuge tube to the assay plate. They were then taught how to use a kimwipe tissue to dry the liquid droplet so that worms could navigate. Assay results were recored either 30 minutes or 1.5 hours after the start of each assay and the number of worms on the food patch and control patch at the end of the assay was recorded. Students were able to see the results of the first group's assay by the end of the class period. 
+
+*Food residence assay:* 
+Plates were set up the evening prior to the school visit similar to the chemotaxis assay, except that 6cm plates were used and the bacterial spots were placed in the center of the NGM plates. A set of control plates with no bacteria were also prepared. On the morning of the visit, 10 worms of each genotype were added to each plate and the plates were sealed with parafilm to be used in station 1. 
+
+*Feeding and egg-laying simulation:*
+A laptop computer was used in station 2 for the simulation data. A simple feeding and egg-laying simulation was generated using the Shiny package in R and Rstudio. The model was based on variable feeding rate $r$ (24 - 480 cells/min), starting food supply $N_0$ (50 million - 1 billion cells) and the number of starting worms $W_0$ (1 - 50 animals), which could be altered using slider bars by the students. The egg-laying rate was a fixed-function of feeding rate $r_{eggs} = r / 24$. The number of worms as a function of time was estimated by: 
+
+$$W_{t} = W_0 + W_0r_{eggs}t$$
+
+And the amount of bacteria was determined by:
+
+$$N_{t} = N_0 - 60W_t r t$$
+Any eggs laid within 6 hours of food exhaustion were assumed to starve and were used to calculate the number of surviving and non-surviving worms. 
+
+
+***Instructions: Station 1***
+
+In this station, you are going to observe how worms behave around food. You will see where the spend their time and where they lay their eggs. You’ll also learn about whether the sense of smell or having enough food available influences this behavior. 
+
+1.	Find your 3 small petri dishes for this station. 
+
+*Normal worms*
+
+2.	Look at the plate labeled “Normal”. Can you see a circular patch of food or bacteria? Can you see the worms without a microscope? If so where are the worms?
+3.	Look at this plate under the microscope. Can you see where the worms are? Are they on the food patch or off?  Can you count the number on food compared to the number off of food?
+4.	Now look for any eggs you can find. Did the worms lay eggs all over the plate or closer to the food?
+
+*Mutant worms*
+
+5.	Now look at the plate labeled “mutant”. These worms cannot smell as well as the normal worms. Are they in the same place? Are their eggs in the same place? If they are in the same place, how could they tell where they are without using smell?
+
+*Normal worms, low food*
+
+6.	Now pick up the plate labeled “normal, low food”. 
+7.	These worms are the same age but they are on a plate with very little food. Do you see as many eggs? Do you see as many small worms? Do they look healthy?
+
+Use your worksheet to draw and record what you’ve seen at this station.
+
+
+***Instructions: Station 2***
+
+In this station, you will learn the factors that influence survival of offspring in different conditions. The goal is to discover rules that might help the worms to ensure that as many of their offspring as possible have enough food to survive.
+
+1.	Using your Chromebook (1 or 2 per group), open the food simulation app. http://mikeod38.shinyapps.io/FoodSim/. 
+
+2.	This simulates worms feeding on a food patch of either a little “low food” or a lot “high food” of bacteria. The goal of this station is to maximize the number of offspring that a worm or worms can produce. But there is a catch, if eggs hatch with little or no food remaining, they will die. 
+
+3.	Start with the “low food” setting. First adjust the “number of worms” slider. You’ll see the total number of worms and the number that died on the right side. Can you find a setting that allows some worms to survive? Can you increase that number without increasing food?
+
+4.	Now move the slider to “high food”. Try to maximize the number of surviving worms on this setting. Do the same rules apply? Is it beneficial to lay more eggs when there is “low food” or “high food”?
+
+
+***Instructions: Station 3***
+
+In this station, you will learn about how worms can find a food source, whether they use food availability to decide when to lay eggs, and whether the sense of smell is important for this. You will have 2 volunteers perform an experiment to test these questions and you will record your data as a group. 
+
+1.	With the scientists and your teachers as a guide, find and examine your petri plates for the experiment. You should see an ‘x’ in the middle of the plate, with two spots on opposite sides of this. You should see a small patch of food, similar to what you will see or have seen in Station 1. 
+
+2.	One of your instructors will guide you in using a glass Pasteur pipet. 
+
+3.	You will see two tubes, marked “N” for normal and “Mut” for mutant. These tubes contain worms that we have prepared for this experiment. As in Station 1, the mutant worms here cannot smell as well as the normal worms. 
+
+4.	After putting on gloves, two volunteers from each group will work with the instructor to open the small tube, one volunteer will use the normal worms, the other will handle the mutant worms. 
+
+5.	The glass pipettes will be used to suck up the worms from the small tubes, then place them on the small ‘x’ on the center of the experiment plate. 
+
+6.	After the worms are dropped onto the experiment plate, find the small tissue your instructor gives you to dry the worm droplets so that the worms can crawl away. 
+
+7.	When the droplet is dried, cover the plates with the lid and allow the worms to roam around the plate. 
+
+8.	After 5-10 minutes, you should see some kind of pattern to the direction of worm movement. Feel free to watch them as they move. At the end of this station, try to count or observe where the normal and mutant worms have gone. Also look for eggs on the plate. Are there more eggs and worms on the food spot or the control spot, marked with a “c”?
+
+9.	If your worms need more time to navigate, check them again towards the end of class.
+
+***Worksheet***
+
+Students were instructed to fill out the following worksheet to record their impressions and experience. 
+
+
+# Results
+
+***Station 1***
+Students generally found visualizing and counting of eggs to be difficult. Visualizing worms was much easier and students were asked to make qualitative observations about the behavior and appearance of worms around food. Mutant worms tended to be found off food somewhat more often, but this was variable in each session. Worms on the plates without food were difficult to locate, and many had crawled off of the agar and possibly died. With sealed plates this station allowed most students their first chance to see worms up close.
+
+***Station 2***
+Opinions of students with the simulations varied. In lieu of chromebooks we used single laptops for this station. Most groups found the use of the simulation straightforward, some groups discovered the main purpose and conclusions in this section a little more vauge. The intention of this simulation was to introduce "rules" that the students could discover about strategies to maximize reproductive output. The optimal strategies involved limiting egg-laying and feeding rate when there was competition or food was sparse, but to maximize these when food was plentiful.
+
+***Station 3***
+Students generally liked this station the most. Most were able to handle the pipetting with enough instruction and were eager to volunteer. After the first session we determined it would help more to have tubes with water with which the students could practice before pipetting worms for the experiments. Although there was considerable variability in the number of viable worms per assay, we were able to gather enough data over the 4 sessions to quantify the results. 
+
+```{r echo=FALSE, message=FALSE}
+library(tidyverse)
+theme_set(theme_classic())
+data <- read_csv(here::here('McDevitt_Chemotaxis_data.csv')) %>%
+  mutate(pct_on_food = Nfood / (Nfood + Ncontrol + Nplate),
+         genotype = fct_relevel(genotype, "N2"),
+         worm_type = case_when(
+           genotype == "N2"  ~ "normal",
+           genotype == "daf-12; daf-19" ~ "mutant"
+         ),
+         worm_type = fct_relevel(worm_type, "normal"),
+         time = fct_relevel(time, "30 minutes"))
+
+plot <- ggplot(data, aes(x = worm_type, y = pct_on_food)) +
+  geom_point(colour = "grey") +
+  stat_summary(fun.y = median,
+               fun.ymin = median,
+               fun.ymax = median,
+               geom = "crossbar",
+               width = 0.2,
+               lwd = 0.35,
+               colour = "black") +
+  stat_summary(fun.data = "mean_se",
+               geom = "errorbar",
+               width = 0.1,
+               lwd = 0.35,
+               colour = "black") + 
+  facet_grid(.~time) + 
+  theme(strip.background = element_blank()) +
+  labs(x = "", y = "Proportion of worms on food")
+```
+
+```{r echo=FALSE, message=FALSE}
+plot
+
+```
+
+ \begin{itemize}
+  \item[] \textit{Figure 1: sensory mutant animals find food more slowly.} Animals of the indicated type "normal" (N2 strain) or "mutant" \textit{(daf-12; daf-19)} mutants were allowed to navigate to a food spot for the indicated amount of time. Each dot represents a student-performed assay. Data were quantified by scientists after each class session. 
+\end{itemize}
+
+
+We found that mutant worms were less likely to find the food patch during 30 minute time points but that at later time points (1.5 hrs), even mutant worms accumulated on the food patches. This indicates that olfactory sensory input, and possibly other modalities affected by *daf-19* mutations, is important in regulating the rate of accumulation at a food source. Other modalities might play a role in maintaining worms at the food source. 
+
+
+# Discussion
+The demonstration and visit were overall well-received by students and teachers. During the course of the demonstrations we found that allowing more time and giving more simple introductions helped the students to understand and perform the planned experiments. Station 1 could be redesigned to allow students to make a better connection between the behavior of the worms and egg-laying, although microscope optics and the time allowed during this station makes counting eggs difficult for middle-shcoolers. The students were engaged, especially in station 3 and apparently understood the important concepts. Some additional changes and planning could make these demonstrations more smooth in the future, but we considered the overall visit successful. 
+
+
+# References
+
+\begin{itemize}
+\item[] 1. Bargmann, C. I. (2006). Chemosensation in C. elegans. WormBook, 1–29. http://doi.org/10.1895/wormbook.1.123.1
+\item[] 2. 'Schulenburg, H., and Félix, M.-A. (2017). The Natural Biotic Environment of Caenorhabditis elegans. Genetics, 206(1), 55–86. http://doi.org/10.1534/genetics.116.195511'
+\item[] 3. Swoboda, P., Adler, H. T., and Thomas, J. H. (2000). The RFX-type transcription factor DAF-19 regulates sensory neuron cilium formation in C. elegans. Molecular Cell, 5(3), 411–421.
+\end{itemize}
+
+
+
+
+
